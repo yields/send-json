@@ -12,15 +12,27 @@ var once = require('once');
  * Expose `send`
  */
 
-module.exports = Request
+exports = module.exports = Request
   ? json
   : base64;
-  
+
 /**
- * Querystring prefix
+ * Expose `prefix`
  */
 
-module.exports.prefix = 'data';
+exports.prefix = 'data';
+
+/**
+ * Expose `json`.
+ */
+
+exports.json = json;
+
+/**
+ * Expose `base64`.
+ */
+
+exports.base64 = base64;
 
 /**
  * Send the given `obj` to `url` with `fn(err, req)`.
