@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -16,6 +15,12 @@ var once = require('once');
 module.exports = Request
   ? json
   : base64;
+  
+/**
+ * Querystring prefix
+ */
+
+module.exports.prefix = 'data';
 
 /**
  * Send the given `obj` to `url` with `fn(err, req)`.
@@ -52,7 +57,8 @@ function json(url, obj, fn){
  */
 
 function base64(url, obj, fn){
+  var prefix = module.exports.prefix;
   obj = encode(JSON.stringify(obj));
   obj = encodeURIComponent(obj);
-  jsonp(url + '?data=' + obj, fn);
+  jsonp(url + '?'+ prefix +'=' + obj, fn);
 }
