@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf8'>
+    <title>send-json</title>
+    <link rel='stylesheet' href='../build/build.css'>
+    <script src='../build/build.js'></script>
+    <script>require('mocha')</script>
+    <script>mocha.setup({ ui: 'bdd', reporter: 'html' })</script>
+  </head>
+  <body>
+    <div id='mocha'></div>
+    <script src='test.js'></script>
+    <script>
+      (phantom = window.mochaPhantomJS)
+        ? phantom.run()
+        : require('gravy')(mocha.run());
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "send-json",
+  "repo": "yields/send-json",
+  "description": "send json across all browsers",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": ["index.js"],
+  "version": "0.0.1",
+  "dependencies": {
+    "forbeslindesay/base64-encode": "*",
+    "yields/cors-xhr": "*",
+    "learnboost/jsonp": "*",
+    "segmentio/json": "*",
+    "component/once": "*"
+  },
+  "development": {
+    "segmentio/protocol": "*",
+    "visionmedia/mocha": "*",
+    "component/assert": "*",
+    "yields/gravy": "*"
+  }
+}
