@@ -17,6 +17,12 @@ exports = module.exports = Request
   : base64;
 
 /**
+ * Expose `callback`
+ */
+
+exports.callback = 'callback';
+
+/**
  * Expose `prefix`
  */
 
@@ -33,6 +39,14 @@ exports.json = json;
  */
 
 exports.base64 = base64;
+
+/**
+ * Expose `type`
+ */
+
+exports.type = Request
+  ? 'xhr'
+  : 'jsonp';
 
 /**
  * Send the given `obj` to `url` with `fn(err, req)`.
@@ -69,8 +83,15 @@ function json(url, obj, fn){
  */
 
 function base64(url, obj, fn){
-  var prefix = module.exports.prefix;
+  var prefix = exports.prefix;
   obj = encode(JSON.stringify(obj));
   obj = encodeURIComponent(obj);
-  jsonp(url + '?'+ prefix +'=' + obj, fn);
+  url += '?' + prefix + '=' + obj;
+  jsonp(url, { param: exports.callback }, function(err, obj){
+    if (err) return fn(err);
+    fn(null, {
+      url: url,
+      body: obj
+    });
+  });
 }

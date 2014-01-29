@@ -15,6 +15,7 @@
     "component/once": "*"
   },
   "development": {
+    "forbeslindesay/base64-decode": "*",
     "segmentio/protocol": "*",
     "visionmedia/mocha": "*",
     "component/assert": "*",
