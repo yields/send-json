@@ -27,15 +27,15 @@ node_modules: package.json
 	@npm install
 
 server: kill
-	@$(S) test &> /dev/null & echo $$! test/pid
+	@$(S) . &> /dev/null & echo $$! > test/pid
 	@sleep 1
 
 kill:
 	@-test -e test/pid \
-		&& kill $(cat test/pid) \
+		&& kill `cat test/pid` \
 		&& rm -f test/pid
 
-clean: kill kill-test-server
+clean: kill
 	rm -rf components build
 
 .PHONY: clean test test-phantom test-sauce
