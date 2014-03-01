@@ -3,16 +3,15 @@
  */
 
 var encode = require('base64-encode');
-var Request = require('cors-xhr');
+var cors = require('has-cors');
 var jsonp = require('jsonp');
 var JSON = require('json');
-var once = require('once');
 
 /**
  * Expose `send`
  */
 
-exports = module.exports = Request
+exports = module.exports = cors
   ? json
   : base64;
 
@@ -44,7 +43,7 @@ exports.base64 = base64;
  * Expose `type`
  */
 
-exports.type = Request
+exports.type = cors
   ? 'xhr'
   : 'jsonp';
 
@@ -53,23 +52,23 @@ exports.type = Request
  *
  * @param {String} url
  * @param {Object} obj
+ * @param {Object} headers
  * @param {Function} fn
  * @api private
  */
 
-function json(url, obj, fn){
-  var req = new Request;
-  fn = once(fn);
+function json(url, obj, headers, fn){
+  if (3 == arguments.length) fn = headers, headers = {};
+
+  var req = new XMLHttpRequest;
   req.onerror = fn;
-  req.onload =
   req.onreadystatechange = done;
   req.open('POST', url, true);
+  for (var k in headers) req.setRequestHeader(k, headers[k]);
   req.send(JSON.stringify(obj));
 
   function done(){
-    var readied = 4 == req.readyState || req.responseText;
-    if (!readied) return;
-    fn(null, req);
+    if (4 == req.readyState) return fn(null, req);
   }
 }
 
@@ -82,7 +81,8 @@ function json(url, obj, fn){
  * @api private
  */
 
-function base64(url, obj, fn){
+function base64(url, obj, _, fn){
+  if (3 == arguments.length) fn = _;
   var prefix = exports.prefix;
   obj = encode(JSON.stringify(obj));
   obj = encodeURIComponent(obj);

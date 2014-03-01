@@ -8,10 +8,9 @@
   "version": "0.0.1",
   "dependencies": {
     "forbeslindesay/base64-encode": "*",
-    "yields/cors-xhr": "*",
+    "component/has-cors": "*",
     "learnboost/jsonp": "*",
-    "segmentio/json": "*",
-    "component/once": "*"
+    "segmentio/json": "*"
   },
   "development": {
     "forbeslindesay/base64-decode": "*",

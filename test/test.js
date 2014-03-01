@@ -10,7 +10,7 @@ describe('send-json', function(){
     it('should work', function(done){
       if ('xhr' != send.type) return done();
       var url = protocol() + '//httpbin.org/post';
-      send.json(url, [1, 2, 3], function(err, req){
+      send.json(url, [1, 2, 3], {}, function(err, req){
         if (err) return done(new Error(err.message));
         var res = json.parse(req.responseText);
         assert(1 == res.json[0]);
@@ -26,7 +26,7 @@ describe('send-json', function(){
       if ('jsonp' != send.type) return done();
       var url = protocol() + '//www.reddit.com/r/pics.json';
       send.callback = 'jsonp';
-      send.base64(url, [1, 2, 3], function(err, req){
+      send.base64(url, [1, 2, 3], {}, function(err, req){
         if (err) return done(new Error(err.message));
         var data = req.url.split('data=')[1];
         data = decodeURIComponent(data);
