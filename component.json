@@ -2,7 +2,7 @@
   "name": "send-json",
   "repo": "yields/send-json",
   "description": "send json across all browsers",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "index.js",
   "scripts": ["index.js"],
   "dependencies": {
