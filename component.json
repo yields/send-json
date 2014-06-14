@@ -8,7 +8,7 @@
   "dependencies": {
     "forbeslindesay/base64-encode": "*",
     "component/has-cors": "*",
-    "learnboost/jsonp": "0.0.4",
+    "yields/jsonp": "0.0.4",
     "segmentio/json": "*"
   },
   "development": {
