@@ -1,7 +1,7 @@
 language: node_js
 script: make test-sauce
 node_js:
-- '0.10'
+- '0.11'
 env:
   matrix:
   - BROWSER='ie6'
