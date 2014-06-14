@@ -1,21 +1,22 @@
 
+var gravy = require('gravy');
+
 describe('send-json', function(){
   var protocol = require('protocol');
   var decode = require('base64-decode');
-  var send = require('send-json');
+  var send = require('../');
   var assert = require('assert');
   var json = require('json');
 
   describe('#json', function(){
     it('should work', function(done){
       if ('xhr' != send.type) return done();
-      var url = protocol() + '//httpbin.org/post';
-      send.json(url, [1, 2, 3], {}, function(err, req){
+      var url = protocol() + '//localhost:3001/data';
+      var headers = { 'Content-Type': 'application/json' };
+      send.json(url, [1, 2, 3], headers, function(err, req){
         if (err) return done(new Error(err.message));
         var res = json.parse(req.responseText);
-        assert(1 == res.json[0]);
-        assert(2 == res.json[1]);
-        assert(3 == res.json[2]);
+        assert(true == res);
         done();
       });
     })
@@ -41,3 +42,8 @@ describe('send-json', function(){
   })
 });
 
+if (window.mochaPhantomJS) {
+  window.mochaPhantomJS.run();
+} else {
+  gravy(mocha.run());
+}

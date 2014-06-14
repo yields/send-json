@@ -1,6 +1,7 @@
 {
   "name": "send-json",
   "repo": "yields/send-json",
+  "remotes": ["https://raw.githubusercontent.com/"],
   "description": "send json across all browsers",
   "version": "1.1.1",
   "main": "index.js",
@@ -14,7 +15,6 @@
   "development": {
     "forbeslindesay/base64-decode": "*",
     "segmentio/protocol": "*",
-    "visionmedia/mocha": "*",
     "component/assert": "*",
     "yields/gravy": "*"
   }
