@@ -53,17 +53,20 @@ exports.type = cors
  * @param {String} url
  * @param {Object} obj
  * @param {Object} headers
+ * @param {Object} props
  * @param {Function} fn
  * @api private
  */
 
-function json(url, obj, headers, fn){
-  if (3 == arguments.length) fn = headers, headers = {};
+function json(url, obj, headers, props, fn){
+  if (3 == arguments.length) fn = headers, headers = {}, props = {};
+  if (4 == arguments.length) fn = props, props = {};
 
   var req = new XMLHttpRequest;
   req.onerror = fn;
   req.onreadystatechange = done;
   req.open('POST', url, true);
+  for (var p in props) req[p] = props[p];
   for (var k in headers) req.setRequestHeader(k, headers[k]);
   req.send(JSON.stringify(obj));
 
