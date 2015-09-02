@@ -20,6 +20,29 @@ describe('send-json', function(){
         done();
       });
     })
+
+    it('should invoke the callback with an error when connection is refused', function(done){
+      if ('xhr' != send.type) return done();
+      var url = protocol() + '//localhost:4567/data';
+      var headers = { 'Content-Type': 'application/json' };
+      send.json(url, [1, 2, 3], headers, function(err, req){
+        assert(err);
+        assert(typeof err.event === "object");
+        done();
+      });
+    })
+
+    it('should invoke the callback with an error when the request does not succeed', function(done){
+      if ('xhr' != send.type) return done();
+      var url = protocol() + '//localhost:3001/not-found';
+      var headers = { 'Content-Type': 'application/json' };
+      send.json(url, [1, 2, 3], headers, function(err, req){
+        assert(err);
+        assert(typeof req === "object");
+        assert(req.status === 404);
+        done();
+      });
+    })
   })
 
   describe('#base64', function(){

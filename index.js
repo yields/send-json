@@ -61,14 +61,25 @@ function json(url, obj, headers, fn){
   if (3 == arguments.length) fn = headers, headers = {};
 
   var req = new XMLHttpRequest;
-  req.onerror = fn;
-  req.onreadystatechange = done;
+  req.onerror = error;
+  req.onload = done;
   req.open('POST', url, true);
   for (var k in headers) req.setRequestHeader(k, headers[k]);
   req.send(JSON.stringify(obj));
 
   function done(){
-    if (4 == req.readyState) return fn(null, req);
+    // sometimes IE returns 1223 when it should be 204
+    // see http://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
+    if (/^(20\d|1223)$/.test(req.status)) {
+      return fn(null, req)
+    }
+    fn(new Error("Request wasn't successful"), req);
+  }
+
+  function error(event){
+    var err = new Error("A network error ocurred");
+    err.event = event;
+    fn(err);
   }
 }
 
