@@ -27,7 +27,7 @@ describe('send-json', function(){
       var headers = { 'Content-Type': 'application/json' };
       send.json(url, [1, 2, 3], headers, function(err, req){
         assert(err);
-        assert(err.status === undefined);
+        assert(typeof err.evt === "object");
         done();
       });
     })
@@ -38,7 +38,8 @@ describe('send-json', function(){
       var headers = { 'Content-Type': 'application/json' };
       send.json(url, [1, 2, 3], headers, function(err, req){
         assert(err);
-        assert(err.status === 404);
+        assert(typeof err.req === "object");
+        assert(err.req.status === 404);
         done();
       });
     })
