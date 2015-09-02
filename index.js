@@ -71,17 +71,14 @@ function json(url, obj, headers, fn){
     // sometimes IE returns 1223 when it should be 204
     // see http://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
     if (/^(20\d|1223)$/.test(req.status)) {
-      fn(null, req)
-    } else {
-      var err = new Error("Request wasn't successful")
-      err.req = req;
-      fn(err);
+      return fn(null, req)
     }
+    fn(new Error("Request wasn't successful"), req);
   }
 
-  function error(evt){
+  function error(event){
     var err = new Error("A network error ocurred");
-    err.evt = evt;
+    err.event = event;
     fn(err);
   }
 }
