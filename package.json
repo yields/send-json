@@ -1,6 +1,6 @@
 {
   "name": "send-json",
-  "repo": "yields/send-json",
+  "repo": "gjohnson/send-json",
   "desc": "",
   "version": "0.0.1",
   "dependencies": {

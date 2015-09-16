@@ -1,6 +1,6 @@
 {
   "name": "send-json",
-  "repo": "yields/send-json",
+  "repo": "gjohnson/send-json",
   "remotes": ["https://raw.githubusercontent.com/"],
   "description": "send json across all browsers",
   "version": "1.1.1",
